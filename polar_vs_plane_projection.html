@@ -112,23 +112,20 @@
             'attribute vec3 color;'+//the color of the point
             'varying vec3 vColor;'+
 
-            'void main(void) { '+//pre-built function
+           'void main(void) { '+//pre-built function
                'float PI = 3.14153832795;'+
-               'float fov = 120./180.*PI;'+ // fov
+               'float fov = 100./180.*PI;'+
+               'float far = 100.0;'+
+               'float near = 0.0;'+
                'vec4 pos = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);'+
                'float x2y2 = pos.x*pos.x+pos.y*pos.y;'+
                'float a = atan(pos.x, pos.y);'+
                'float b = atan(sqrt(x2y2), pos.z);'+
-               //'if (b<fov/2.){'+
                'float r = sqrt(x2y2+pos.z*pos.z);'+
                'pos.x = 2.0*b*sin(a)/fov;'+
                'pos.y = 2.0*b*cos(a)/fov;'+
-               'pos.z = pos.z/10000.0 - 1.0;'+
+               'pos.z = 2.0*pos.z/(far-near) - (far+near)/(far-near);'+
                'gl_Position = pos;'+
-               //'}else{'+
-               //'pos.x = pos.y = 0.0;'+
-               //'pos.z = 99999999.0;'+
-               //'}'+
                'vColor = color;'+
             '}';
          
