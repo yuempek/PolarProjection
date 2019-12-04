@@ -113,20 +113,25 @@
             'varying vec3 vColor;'+
 
            'void main(void) { '+//pre-built function
-               'float PI = 3.14153832795;'+
-               'float fov = 100./180.*PI;'+
-               'float far = 100.0;'+
-               'float near = 0.0;'+
-               'vec4 pos = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);'+
-               'float x2y2 = pos.x*pos.x+pos.y*pos.y;'+
-               'float a = atan(pos.x, pos.y);'+
-               'float b = atan(sqrt(x2y2), pos.z);'+
-               'float r = sqrt(x2y2+pos.z*pos.z);'+
-               'pos.x = 2.0*b*sin(a)/fov;'+
-               'pos.y = 2.0*b*cos(a)/fov;'+
-               'pos.z = 2.0*pos.z/(far-near) - (far+near)/(far-near);'+
-               'gl_Position = pos;'+
-               'vColor = color;'+
+              //'gl_Position.y *= -1.0;'+
+              'gl_Position.z += -0.0;'+
+              'float far = 200000.0;'+
+              'float near = -0.99;'+
+              'float aspect = 2.0;'+
+              'float PIx = 3.14153832795;'+
+              'float fov = 90./180.*PIx;'+
+              'vec4 pos = gl_Position;'+
+              'float x = pos.x;'+
+              'float y = pos.y;'+
+              'float z = pos.z;'+
+              'float sqrt_x2y2 = sqrt(x*x+y*y);'+
+              //'float a = atan(x, y);'+
+              'float b = atan(sqrt_x2y2, z);'+
+              //'float r = sqrt(x2y2+z*z);'+
+              'pos.x = 2.0*b*(x/sqrt_x2y2)/fov;'+ // sin(a) = x/sqrt_x2y2
+              'pos.y = 2.0*b*(y/sqrt_x2y2)/fov*aspect;'+ // cos(a) = x/sqrt_x2y2
+              'pos.z = 2.0*z/(far-near) - (far+near)/(far-near);'+
+              'gl_Position = pos;'+
             '}';
          
          var vertCode2 = 'attribute vec3 position;'+
