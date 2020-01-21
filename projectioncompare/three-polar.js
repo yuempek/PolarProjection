@@ -14230,7 +14230,7 @@
     "gl_Position = mvPosition;",
     "if(true){",
               //"mvPosition.x *= -1.0;",
-              'gl_Position.z *= 1.0;',
+              'gl_Position.z *= -1.0;',
               'float far = 200.0;',
               'float aspect = 2.0;',
               'float near = -0.99;',
