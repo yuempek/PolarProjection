@@ -14233,7 +14233,7 @@
               'gl_Position.z *= -1.0;',
               'float far = 200.0;',
               'float aspect = 2.0;',
-              'float near = -0.99;',
+              'float near = 0;',
               'float PIx = 3.14153832795;',
               'float fov = 135./180.*PIx;',
               'vec4 pos = gl_Position;',
